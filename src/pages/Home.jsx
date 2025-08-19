@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Home.css'
 
 const Home = ({ articles }) => {
@@ -11,6 +11,24 @@ const Home = ({ articles }) => {
   const [clock, setClock] = useState(true)
   const [date, setDate] = useState(getFormattedDate())
 
+  //const backToTop = () => {
+    const [show, setShow] = useState(false)
+    useEffect(() => {
+      const handleScroll = () => {
+        setShow(window.scrollY > 300)
+      }
+      window.addEventListener("scroll", handleScroll)
+      return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
+
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    }
+  //}
+
   function getFormattedDate() {
     const now = new Date()
     return now.toLocaleDateString('en-US', {
@@ -19,6 +37,8 @@ const Home = ({ articles }) => {
       day: 'numeric',
     })
   }
+
+
 
   return (
     <div className="container">
@@ -59,6 +79,15 @@ const Home = ({ articles }) => {
       
       </div>
     )}
+    <div className="totop__btn--container">
+      <button style={{
+              opacity: show ? 1 : 0,
+              transition: "all 300ms ease"}}   
+              onClick={scrollToTop}
+              className="totop__btn">
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
+    </div>
     </div>
   )
 }

@@ -27,6 +27,7 @@ const Navbar = ({ onSearch }) => {
           </button>
         </form>
       </ul>
+      
     </nav>
   )
 }
