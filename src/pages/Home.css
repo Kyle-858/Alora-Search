@@ -112,7 +112,11 @@
 }
 
 .article__date {
-    padding-bottom: 12px;
+    padding: 12px 0;
+}
+
+.article__publisher {
+    padding-top: 24px
 }
 
 .article__info {
@@ -146,7 +150,7 @@
     width: 72px;
     display: flex;
     justify-content: center;
-    align-items: center;;
+    align-items: center;
 }
 
 .totop__btn {

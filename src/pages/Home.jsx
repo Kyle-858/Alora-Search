@@ -68,6 +68,7 @@ const Home = ({ articles }) => {
             <p className="article__title">{article.title.slice(0, 100)}</p>
             <p className="article__date">{article.publishedAt}</p>
             <p className="article__summary">{article.description}</p>
+            <p className="article__publisher">{article.source.name}</p>
           </div>
           {article.urlToImage == "null" ? "" : 
           <div className="img__wrapper">
