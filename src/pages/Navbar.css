@@ -2,7 +2,7 @@ nav {
     height: 72px;
     background: linear-gradient(to bottom left, #4caf50, #21f3);
     z-index: 2;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     border-bottom: 1px solid white;
@@ -36,6 +36,18 @@ nav {
     text-align: center;
     border: none;
     margin: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.search__input {
+    border: none;
+    font-size: 24px;
+    background: none;
+    margin-left: 24px;
+    width: calc(100% - 48px);
+    color: black;
 }
 
 .search__btn {
@@ -53,7 +65,7 @@ nav {
 
 .search__btn i {
     color: white;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .search__btn:hover {

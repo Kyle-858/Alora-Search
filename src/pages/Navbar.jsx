@@ -1,18 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Navbar.css'
-import alora_logo from '../assets/alora_logo.png'
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
+
+  const [query, setQuery] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (query.trim()) {
+      onSearch(query)
+    }
+  }
+  
   return (
     <nav>
       <ul className="nav__list">
-        <div className="logo">
-            <img src={alora_logo} alt="" />
-        </div>
-        <input placeHolder="Search..." type="text" className="search__bar"></input>
-        <button className="search__btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+        <form className="search__bar" onSubmit={handleSubmit}>
+          <input placeholder="Search..." 
+            type="text" 
+            className="search__input" 
+            value={query} 
+            onChange={(e) => setQuery(e.target.value)}>
+          </input>
+          <button type="submit" className="search__btn">
+              <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
       </ul>
     </nav>
   )

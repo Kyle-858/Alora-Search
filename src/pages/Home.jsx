@@ -1,10 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Home.css'
-import { useState } from 'react'
 
-//API Key: a9796cec7971495a861cf905f1adc8cc
-
-const Home = () => {
+const Home = ({ articles }) => {
 
   const now = new Date()
   const milHours = now.getHours()
@@ -24,21 +21,44 @@ const Home = () => {
   }
 
   return (
-    <div className="background">
-      <div className="home__row">
-        
-        <h1 className="title">Alora</h1>
-        <span className="date">{date}</span>
-        {clock ? <span onClick={() => setClock(false)} className="clock">{milHours} : {minutes}</span>
-        : <span onClick={() => setClock(true)} className="clock">{hours} : {minutes} {ampm}</span>}
-      </div>
-      <div className="toolbar">
-        <div className="stock__info toolbar__widget">NASDAQ +1.09%</div>
-        <div className="toolbar__widget">Cloudy</div>
-        <div className="add__btn toolbar__widget">
-          <i classNme="plus__sign" class="fa-solid fa-plus"></i>
+    <div className="container">
+    <div className="background"></div>
+      {articles.length === 0 ? (
+        <>
+          <div className="home__row">
+            <h1 className="title">alora</h1>
+            <span className="date">{date}</span>
+            {clock ? <span onClick={() => setClock(false)} className="clock">{milHours} : {minutes}</span>
+            : <span onClick={() => setClock(true)} className="clock">{hours} : {minutes} {ampm}</span>}
+          </div>
+          <div className="toolbar">
+            <div className="stock__info toolbar__widget">NASDAQ +1.09%</div>
+            <div className="toolbar__widget">Cloudy</div>
+            <div className="add__btn toolbar__widget">
+              <i className="plus__sign" class="fa-solid fa-plus"></i>
+            </div>
+          </div>
+        </>
+      ) : (
+      <div className="search__results">
+      {articles.map((article, idx) => (
+        <a href={article.url} target="_blank">
+        <div className="article" key={idx}>
+          <div className="article__info">
+            <p className="article__title">{article.title.slice(0, 100)}</p>
+            <p className="article__date">{article.publishedAt}</p>
+            <p className="article__summary">{article.description}</p>
+          </div>
+          {article.urlToImage == "null" ? "" : 
+          <div className="img__wrapper">
+            <img className="article__img" src={article.urlToImage} alt="" />
+          </div>}
         </div>
+        </a>
+      ))}
+      
       </div>
+    )}
     </div>
   )
 }
